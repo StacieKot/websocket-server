@@ -10,7 +10,7 @@ import {
   leaveRoomHandler,
 } from "./handlers/room";
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 const allowedOrigins = ["http://localhost:8080"];
