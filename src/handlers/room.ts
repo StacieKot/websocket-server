@@ -23,7 +23,7 @@ export const createRoomHandler =
         role: UserRole.master,
       });
       socket.join(roomId);
-      socket.emit(ROOM_WAS_CREATED, socket.id, store[roomId]);
+      socket.emit(ROOM_WAS_CREATED, store[roomId]);
     } catch (error) {
       socket.emit("error", { status: 500, message: "error" });
     }
@@ -36,7 +36,7 @@ export const joinRoomHandler =
       if (store[roomId]) {
         const joinedUser = addUser(store, roomId, socket.id, user);
         socket.join(roomId);
-        socket.emit(JOINED_ROOM, socket.id, store[roomId]);
+        socket.emit(JOINED_ROOM, store[roomId]);
         socket.to(roomId).emit(USER_CONNECTED, socket.id, joinedUser);
       } else {
         socket.emit(ROOM_NOT_FOUND, socket.id);
@@ -52,7 +52,7 @@ export const leaveRoomHandler =
   (roomId: string): void => {
     try {
       changeUserStatus(store, roomId, socket.id, UserStatus.left);
-      socket.emit(LEFT_ROOM, socket.id);
+      socket.emit(LEFT_ROOM);
       socket.to(roomId).emit(USER_LEFT, socket.id);
     } catch (error) {
       socket.emit("error", { status: 500, message: "error" });
