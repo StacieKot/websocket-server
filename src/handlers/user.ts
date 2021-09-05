@@ -4,6 +4,7 @@ import {
   changeUserStatus,
   getKickingResult,
   notAllUsersHaveVoted,
+  userCanNotBeKicked,
   vote,
 } from "../actions/user";
 import {
@@ -22,9 +23,10 @@ export const kickUserHandler =
   (socket: Socket) =>
   ({ userId, roomId }: UserData): void => {
     try {
-      if (userId === socket.id) {
+      if (userCanNotBeKicked(socket.id, userId, roomId, store)) {
         return;
       }
+
       const user = changeUserStatus(store, roomId, userId, UserStatus.kicked);
       addKickVoteArray(store, roomId, userId);
       socket.emit(USER_IS_KICKED, { userId, user });
