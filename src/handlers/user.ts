@@ -26,7 +26,6 @@ export const kickUserHandler =
       if (userCanNotBeKicked(socket.id, userId, roomId, store)) {
         return;
       }
-
       const user = changeUserStatus(store, roomId, userId, UserStatus.kicked);
       addKickVoteArray(store, roomId, userId);
       socket.emit(USER_IS_KICKED, { userId, user });
