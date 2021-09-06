@@ -28,7 +28,7 @@ const options: cors.CorsOptions = {
 
 app.use(cors(options));
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, hello!");
+  res.send("Hello!");
 });
 const server = createServer(app);
 
