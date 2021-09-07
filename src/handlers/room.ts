@@ -21,7 +21,7 @@ export const createRoomHandler =
       socket.join(roomId);
       callback({ status: 200, data: { room: store[roomId], roomId } });
     } catch {
-      handleError(socket, callback, true);
+      handleError(socket, callback, false);
     }
   };
 
@@ -33,8 +33,6 @@ export const checkRoomHandler =
       callback({ status: 200, data: response });
     } catch {
       handleError(socket, callback, false);
-    } finally {
-      socket.disconnect();
     }
   };
 
