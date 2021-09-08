@@ -1,12 +1,17 @@
 import { ErrorResponse } from "./data";
+import { GameSettings } from "./game";
+import { Issue } from "./issue";
 import { Message } from "./message";
-import { Room } from "./store";
+import { Room } from "./room";
 import { User } from "./user";
 
 type DataType =
   | { room: Room | null; roomId: string }
   | { userId: string; user: User }
+  | { issueId: string; issue: Issue }
   | Message
+  | GameSettings
+  | Issue
   | boolean
   | string;
 

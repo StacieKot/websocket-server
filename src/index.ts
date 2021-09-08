@@ -6,12 +6,20 @@ import { Server, Socket } from "socket.io";
 import { promisify } from "util";
 import {
   ChatEvents,
+  GameEvents,
+  IssueEvents,
   KickUserEvents,
   RoomEvents,
   UserEvents,
 } from "./constants/events";
+import { gameStatusHandler } from "./handlers/game/gameStatus";
+import { gameSettingsHandler } from "./handlers/game/settings";
+import { addIssueHandler } from "./handlers/issues/add";
+import { deleteIssueHandler } from "./handlers/issues/delete";
+import { updateIssueHandler } from "./handlers/issues/update";
 import { sendMessageHandler } from "./handlers/message";
 import { checkRoomHandler, createRoomHandler } from "./handlers/room";
+import { deleteUserHandler } from "./handlers/user/delete";
 import { joinRoomHandler } from "./handlers/user/joinRoom";
 import { kickUserHandler } from "./handlers/user/kick";
 import { kickUserVotingHandler } from "./handlers/user/kickVote";
@@ -32,6 +40,9 @@ app.use(cors(options));
 
 const server = createServer(app);
 const io = new Server(server);
+// const io = new Server(server, {
+//   maxHttpBufferSize: 1e8,
+// });
 const client = redis.createClient(secret);
 
 const redisGetAsync = promisify(client.get).bind(client);
@@ -48,6 +59,12 @@ io.on("connection", (socket: Socket) => {
   socket.on(UserEvents.leaveRoom, leaveRoomHandler(params));
   socket.on(KickUserEvents.kickUser, kickUserHandler(params));
   socket.on(KickUserEvents.kickingVote, kickUserVotingHandler(io, params));
+  socket.on(GameEvents.changeGameSettings, gameSettingsHandler(params));
+  socket.on(GameEvents.changeGameStatus, gameStatusHandler(params));
+  socket.on(KickUserEvents.deleteUser, deleteUserHandler(params));
+  socket.on(IssueEvents.addIssue, addIssueHandler(params));
+  socket.on(IssueEvents.deleteIssue, deleteIssueHandler(params));
+  socket.on(IssueEvents.updateIssue, updateIssueHandler(params));
   // socket.on(UserEvents.disconnecting, disconnectingUserHandler(socket));
 });
 
