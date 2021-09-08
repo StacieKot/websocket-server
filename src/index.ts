@@ -29,9 +29,7 @@ const options: cors.CorsOptions = {
 };
 
 app.use(cors(options));
-// // app.get("/", (req: Request, res: Response) => {
-// //   res.send("Hello!");
-// // });
+
 const server = createServer(app);
 const io = new Server(server);
 const client = redis.createClient(secret);
