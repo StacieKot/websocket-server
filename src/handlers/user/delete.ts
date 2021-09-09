@@ -1,4 +1,3 @@
-import { Server } from "socket.io";
 import { changeUserStatus } from "../../actions/user/changeStatus";
 import { KickUserEvents } from "../../constants/events";
 import { getRoom } from "../../helpers";
@@ -8,7 +7,7 @@ import { UserData } from "../../types/data";
 import { UserStatus } from "../../types/user";
 
 export const deleteUserHandler =
-  (io: Server, { socket, redisGetAsync, redisSetAsync }: HandlerParams) =>
+  ({ socket, redisGetAsync, redisSetAsync }: HandlerParams) =>
   async (
     { userId, roomId }: UserData,
     callback: EventCallback
@@ -27,7 +26,6 @@ export const deleteUserHandler =
         .to(roomId)
         .except(userId)
         .emit(KickUserEvents.userIsDeleted, { userId, user: updatedUser });
-      io.to(userId).disconnectSockets();
     } catch (error) {
       socket.emit("error", { status: 500, message: "error" });
     }
