@@ -11,7 +11,7 @@ export const createRoom = (userId: string, user: User): Room => ({
       status: UserStatus.active,
     },
   },
-  messages: {},
+  messages: [],
   issues: {},
   gameStatus: GameStatus.pending,
   gameSettings: INIT_GAME_SETTINGS,
