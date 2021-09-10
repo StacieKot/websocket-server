@@ -9,7 +9,7 @@ type DataType =
   | { room: Room | null; roomId: string }
   | { userId: string; user: User }
   | { issueId: string; issue: Issue }
-  | Message
+  | { messageId: string; message: Message }
   | GameSettings
   | Issue
   | boolean

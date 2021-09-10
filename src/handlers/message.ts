@@ -1,3 +1,4 @@
+import { addMessage } from "../actions/messages";
 import { ChatEvents } from "../constants/events";
 import { getRoom, handleError } from "../helpers";
 import { HandlerParams } from "../types";
@@ -13,10 +14,10 @@ export const sendMessageHandler =
     try {
       const room = await getRoom(roomId, redisGetAsync);
       const message = { userId: socket.id, text };
-      room.messages.push(message);
-      await redisSetAsync(roomId, JSON.stringify(room));
-      callback({ status: 200, data: message });
-      socket.to(roomId).emit(ChatEvents.receiveMessage, message);
+      const { updatedRoom, messageId } = addMessage(room, message);
+      await redisSetAsync(roomId, JSON.stringify(updatedRoom));
+      callback({ status: 200, data: { message, messageId } });
+      socket.to(roomId).emit(ChatEvents.receiveMessage, { message, messageId });
     } catch {
       handleError(socket, callback);
     }
