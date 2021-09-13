@@ -52,9 +52,9 @@ const redisSetAsync = promisify(client.set).bind(client);
 io.on('connection', (socket: Socket) => {
   console.log('Connected ' + socket.id);
 
-  const roomData = socket.rooms.values();
-  const [id, roomId] = roomData;
-  socket.emit('YOU ARE CONNECTED', id, roomId);
+  // const roomData = socket.rooms.values();
+  // const [id, roomId] = roomData;
+  // socket.emit('YOU ARE CONNECTED', id, roomId);
 
   const params: HandlerParams = { socket, redisGetAsync, redisSetAsync };
 
