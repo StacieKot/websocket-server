@@ -35,9 +35,13 @@ export const kickUserVotingHandler =
         ? KickUserEvents.userIsDeleted
         : KickUserEvents.userIsNotDeleted;
 
+      const kickedUserEvent = userWasKicked
+        ? KickUserEvents.youAreDeleted
+        : KickUserEvents.youAreNotDeleted;
+
       socket.emit(event, kickUserData);
       socket.to(roomId).except(kickedUserId).emit(event, kickUserData);
-      socket.to(kickedUserId).emit(event, kickUserData);
+      socket.to(kickedUserId).emit(kickedUserEvent, kickUserData);
 
       if (userWasKicked) {
         io.to(kickedUserId).disconnectSockets();
