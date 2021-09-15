@@ -3,12 +3,14 @@ import { User, UserRole, UserStatus } from '../../types/user';
 
 export const kickUser = (
   roomId: string,
+  kickInitiator: string,
   userId: string,
   store: Store
 ): User => {
   const room = store[roomId];
   const votingUsersInRoom = Object.entries(room.users).filter(
-    ([id, { status }]) => id !== userId && status === UserStatus.active
+    ([id, { status }]) =>
+      id !== userId && id !== kickInitiator && status === UserStatus.active
   );
   const kickingVote = votingUsersInRoom.map(([id]) => ({
     id: id,

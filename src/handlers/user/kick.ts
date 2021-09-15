@@ -14,7 +14,7 @@ export const kickUserHandler =
         callback({ status: 403, data: 'User can not be kicked' });
         return;
       }
-      const kickedUser = kickUser(roomId, userId, store);
+      const kickedUser = kickUser(roomId, socket.id, userId, store);
       const response = {
         kickInitiator: socket.id,
         kickedUserId: userId,
