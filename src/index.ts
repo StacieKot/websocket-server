@@ -25,8 +25,8 @@ import { joinRoomHandler } from './handlers/user/joinRoom';
 import { kickUserHandler } from './handlers/user/kick';
 import { kickUserVotingHandler } from './handlers/user/kickVote';
 import { leaveRoomHandler } from './handlers/user/leaveRoom';
+import { userReconnectingHandler } from './handlers/user/reconnecting';
 import secret from './secret';
-import { HandlerParams } from './types';
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -52,26 +52,25 @@ const redisSetAsync = promisify(client.set).bind(client);
 io.on('connection', (socket: Socket) => {
   console.log('Connected ' + socket.id);
 
-  const roomData = socket.rooms.values();
-  const [id, roomId] = roomData;
-  socket.emit('YOU ARE CONNECTED', id, roomId);
+  // const roomData = socket.rooms.values();
+  // const [id, roomId] = roomData;
+  // socket.emit('YOU ARE CONNECTED', id, roomId);
 
-  const params: HandlerParams = { socket, redisGetAsync, redisSetAsync };
-
-  socket.on(RoomEvents.createRoom, createRoomHandler(params));
-  socket.on(RoomEvents.isRoomValid, checkRoomHandler(params));
-  socket.on(UserEvents.joinRoom, joinRoomHandler(params));
-  socket.on(ChatEvents.sendMessage, sendMessageHandler(params));
-  socket.on(UserEvents.leaveRoom, leaveRoomHandler(params));
-  socket.on(KickUserEvents.kickUser, kickUserHandler(params));
-  socket.on(KickUserEvents.kickingVote, kickUserVotingHandler(io, params));
-  socket.on(GameEvents.changeGameSettings, gameSettingsHandler(params));
-  socket.on(GameEvents.changeGameStatus, gameStatusHandler(params));
-  socket.on(KickUserEvents.deleteUser, deleteUserHandler(params));
-  socket.on(IssueEvents.addIssue, addIssueHandler(params));
-  socket.on(IssueEvents.deleteIssue, deleteIssueHandler(params));
-  socket.on(IssueEvents.updateIssue, updateIssueHandler(params));
-  socket.on(UserEvents.disconnecting, userDisconnectionHandler(params));
+  socket.on(RoomEvents.createRoom, createRoomHandler(socket));
+  socket.on(RoomEvents.isRoomValid, checkRoomHandler(socket));
+  socket.on(UserEvents.joinRoom, joinRoomHandler(socket));
+  socket.on(ChatEvents.sendMessage, sendMessageHandler(socket));
+  socket.on(UserEvents.leaveRoom, leaveRoomHandler(socket));
+  socket.on(KickUserEvents.kickUser, kickUserHandler(socket));
+  socket.on(KickUserEvents.kickingVote, kickUserVotingHandler(io, socket));
+  socket.on(GameEvents.changeGameSettings, gameSettingsHandler(socket));
+  socket.on(GameEvents.changeGameStatus, gameStatusHandler(socket));
+  socket.on(KickUserEvents.deleteUser, deleteUserHandler(socket));
+  socket.on(IssueEvents.addIssue, addIssueHandler(socket));
+  socket.on(IssueEvents.deleteIssue, deleteIssueHandler(socket));
+  socket.on(IssueEvents.updateIssue, updateIssueHandler(socket));
+  socket.on(UserEvents.disconnecting, userDisconnectionHandler(socket));
+  socket.on(UserEvents.reconnected, userReconnectingHandler(socket));
 });
 
 server.listen(PORT, () => {
