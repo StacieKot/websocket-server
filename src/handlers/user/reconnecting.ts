@@ -26,7 +26,7 @@ export const userReconnectingHandler =
       socket.to(roomId).emit(UserEvents.userReconnected, {
         newUserId: socket.id,
         user: updatedUser,
-        messages: room.messages,
+        room,
       });
     } catch (error) {
       handleError(socket, callback);
