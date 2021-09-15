@@ -16,7 +16,9 @@ export const userReconnectingHandler =
         userId,
         store
       );
+
       socket.join(roomId);
+
       callback({
         status: 200,
         data: { room, newUserId: socket.id, user: updatedUser },
