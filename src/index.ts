@@ -48,7 +48,7 @@ io.on('connection', (socket: Socket) => {
   // const roomData = socket.rooms.values();
   // const [id, roomId] = roomData;
   // socket.emit('YOU ARE CONNECTED', id, roomId);
-
+  socket.on(UserEvents.disconnecting, userDisconnectionHandler(socket));
   socket.on(RoomEvents.createRoom, createRoomHandler(socket));
   socket.on(RoomEvents.isRoomValid, checkRoomHandler(socket));
   socket.on(UserEvents.joinRoom, joinRoomHandler(socket));
@@ -62,7 +62,6 @@ io.on('connection', (socket: Socket) => {
   socket.on(IssueEvents.addIssue, addIssueHandler(socket));
   socket.on(IssueEvents.deleteIssue, deleteIssueHandler(socket));
   socket.on(IssueEvents.updateIssue, updateIssueHandler(socket));
-  socket.on(UserEvents.disconnecting, userDisconnectionHandler(socket));
   socket.on(UserEvents.reconnected, userReconnectingHandler(socket));
 });
 
