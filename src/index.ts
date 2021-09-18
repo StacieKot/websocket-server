@@ -13,7 +13,6 @@ import {
 import { gameStatusHandler } from './handlers/game/gameStatus';
 import { setFinalVoteHandler } from './handlers/game/setFinalVote';
 import { gameSettingsHandler } from './handlers/game/settings';
-import { startGameHandler } from './handlers/game/startGame';
 import { startRoundHandler } from './handlers/game/startRound';
 import { stopRoundHandler } from './handlers/game/stopRound';
 import { voteHandler } from './handlers/game/vote';
@@ -70,7 +69,6 @@ io.on('connection', (socket: Socket) => {
   socket.on(IssueEvents.updateIssue, updateIssueHandler(socket));
   socket.on(UserEvents.disconnecting, userDisconnectionHandler(socket));
   socket.on(UserEvents.reconnected, userReconnectingHandler(socket));
-  socket.on(GameEvents.startGame, startGameHandler(socket));
   socket.on(GameEvents.activateIssue, activateIssueHandler(socket));
   socket.on(GameEvents.issueVote, voteHandler(socket));
   socket.on(GameEvents.startRound, startRoundHandler(socket));
