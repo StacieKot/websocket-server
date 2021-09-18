@@ -10,6 +10,8 @@ export interface Room {
   gameStatus: keyof typeof GameStatus;
   gameSettings: GameSettings;
   currentRound: Round | null;
+  gameTitle: string;
+  masterId: string;
 }
 
 export interface StoreSchema {

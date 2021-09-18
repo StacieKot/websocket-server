@@ -6,6 +6,13 @@ export interface NewUserData {
   user: User;
 }
 
+export interface AccessData {
+  roomId: string;
+  user: User;
+  userId: string;
+  confirmation: boolean;
+}
+
 export interface MessageData {
   roomId: string;
   text: string;

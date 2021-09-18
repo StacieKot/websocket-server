@@ -20,12 +20,9 @@ export interface GameSettings {
   autoFlip: boolean;
 }
 
-export interface GameSettingsData {
+export interface GameData {
   roomId: string;
   settings: GameSettings;
-}
-
-export interface GameStatusData {
-  roomId: string;
   gameStatus: keyof typeof GameStatus;
+  gameTitle: string;
 }

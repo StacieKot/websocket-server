@@ -2,6 +2,9 @@ export enum RoomEvents {
   createRoom = 'CREATE_ROOM',
   isRoomValid = 'IS_ROOM_VALID',
   roomNotFound = 'ROOM_NOT_FOUND',
+  confirmAccess = 'CONFIRM_ACCESS',
+  accessConfirmation = 'ACCESS_CONFIRMATION',
+  accessConfirmationResponse = 'ACCESS_CONFIRMATION_RESPONSE',
 }
 
 export enum ChatEvents {
@@ -38,6 +41,8 @@ export enum GameEvents {
   gameSettingsChanged = 'GAME_SETTINGS_CHANGED',
   changeGameStatus = 'CHANGE_GAME_STATUS',
   gameStatusChanged = 'GAME_STATUS_CHANGED',
+  changeGameTitle = 'CHANGE_GAME_TITLE',
+  gameTitleChanged = 'GAME_TITLE_CHANGED',
   startGame = 'START_GAME',
   gameIsStarted = 'GAME_IS_STARTED',
   activateIssue = 'ACTIVATE_ISSUE',

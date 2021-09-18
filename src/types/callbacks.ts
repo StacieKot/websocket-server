@@ -8,7 +8,7 @@ import { User } from './user';
 type DataType =
   | { room: Room | null; roomId: string }
   | { room: Room | null; newUserId: string }
-  | { userId: string; user: User }
+  | { userId?: string; user?: User; message?: string }
   | { kickedUserId: string; kickedUser: User }
   | {
       issueId: string;

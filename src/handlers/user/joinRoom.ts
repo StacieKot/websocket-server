@@ -1,17 +1,39 @@
 import { Socket } from 'socket.io';
-import { roomExists } from '../../actions/room';
+import { admissionNeeded, roomExists } from '../../actions/room';
 import { addUser } from '../../actions/user/addUser';
-import { UserEvents } from '../../constants/events';
+import { RoomEvents, UserEvents } from '../../constants/events';
 import { handleError } from '../../helpers';
 import { store } from '../../store';
 import { EventCallback } from '../../types/callbacks';
 import { NewUserData } from '../../types/data';
+import { Store } from '../../types/room';
+import { User } from '../../types/user';
+
+const confirmAccessToRoom = (
+  socket: Socket,
+  roomId: string,
+  userId: string,
+  user: User,
+  store: Store
+) => {
+  const { masterId } = store[roomId];
+  socket.to(masterId).emit(RoomEvents.confirmAccess, {
+    userId,
+    user,
+  });
+};
 
 export const joinRoomHandler =
   (socket: Socket) =>
   ({ roomId, user }: NewUserData, callback: EventCallback): void => {
     try {
-      if (roomExists(roomId, store)) {
+      if (admissionNeeded(roomId, store)) {
+        confirmAccessToRoom(socket, roomId, socket.id, user, store);
+        callback({
+          status: 202,
+          data: 'Your request to join the room has been accepted',
+        });
+      } else if (roomExists(roomId, store)) {
         const { room, joinedUser } = addUser(roomId, socket.id, user, store);
         callback({
           status: 200,

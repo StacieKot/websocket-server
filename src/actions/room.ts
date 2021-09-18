@@ -6,6 +6,11 @@ import { User, UserRole, UserStatus } from '../types/user';
 export const roomExists = (roomId: string, store: Store): boolean =>
   !!store[roomId];
 
+export const admissionNeeded = (roomId: string, store: Store): boolean =>
+  !!store[roomId] &&
+  store[roomId].gameSettings.autoAdmitNewUsers &&
+  store[roomId].gameStatus === GameStatus.active;
+
 const createRoomId = (store: Store): string => {
   let id = Date.now().toString();
   if (roomExists(id, store)) {
@@ -33,6 +38,8 @@ export const createRoom = (
     gameStatus: GameStatus.pending,
     gameSettings: INIT_GAME_SETTINGS,
     currentRound: null,
+    gameTitle: '',
+    masterId: userId,
   };
 
   store[roomId] = room;

@@ -11,6 +11,7 @@ import {
   UserEvents,
 } from './constants/events';
 import { gameStatusHandler } from './handlers/game/gameStatus';
+import { gameTitleHandler } from './handlers/game/gameTitle';
 import { setFinalVoteHandler } from './handlers/game/setFinalVote';
 import { gameSettingsHandler } from './handlers/game/settings';
 import { startRoundHandler } from './handlers/game/startRound';
@@ -22,6 +23,7 @@ import { deleteIssueHandler } from './handlers/issues/delete';
 import { updateIssueHandler } from './handlers/issues/update';
 import { sendMessageHandler } from './handlers/message';
 import { checkRoomHandler, createRoomHandler } from './handlers/room';
+import { accessConfirmationHandler } from './handlers/room/accessConfirmation';
 import { deleteUserHandler } from './handlers/user/delete';
 import { userDisconnectionHandler } from './handlers/user/disconnection';
 import { joinRoomHandler } from './handlers/user/joinRoom';
@@ -74,6 +76,11 @@ io.on('connection', (socket: Socket) => {
   socket.on(GameEvents.startRound, startRoundHandler(socket));
   socket.on(GameEvents.stopRound, stopRoundHandler(socket));
   socket.on(GameEvents.setFinalVote, setFinalVoteHandler(socket));
+  socket.on(GameEvents.changeGameTitle, gameTitleHandler(socket));
+  socket.on(
+    RoomEvents.accessConfirmation,
+    accessConfirmationHandler(io, socket)
+  );
 });
 
 server.listen(PORT, () => {
