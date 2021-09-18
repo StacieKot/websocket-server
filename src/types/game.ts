@@ -1,20 +1,23 @@
 export enum GameStatus {
-  pending = "pending",
-  active = "active",
-  finished = "finished",
-  canceled = "canceled",
+  pending = 'pending',
+  active = 'active',
+  finished = 'finished',
+  canceled = 'canceled',
 }
 
 export enum ScoreType {
-  storyPoint = "storyPoint",
+  storyPoint = 'storyPoint',
 }
 
 export interface GameSettings {
   masterAsPlayer?: boolean;
   changingCardInRoundEnd?: boolean;
-  timer?: boolean;
-  scoreType?: keyof typeof ScoreType;
-  roundTime?: number;
+  timer: boolean;
+  scoreType: keyof typeof ScoreType;
+  roundTime: number;
+  cardsNumber: number;
+  autoAdmitNewUsers: boolean;
+  autoFlip: boolean;
 }
 
 export interface GameSettingsData {
