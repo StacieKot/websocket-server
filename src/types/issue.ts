@@ -1,7 +1,7 @@
 export enum IssueStatus {
-  pending = "pending",
-  active = "active",
-  finished = "finished",
+  pending = 'pending',
+  active = 'active',
+  finished = 'finished',
 }
 
 export interface IssueStatistics {
@@ -17,6 +17,7 @@ export interface Issue {
   statistics?: IssueStatistics[];
   vote?: IssueVote[];
   status: keyof typeof IssueStatus;
+  date?: number;
 }
 
 export interface Issues {

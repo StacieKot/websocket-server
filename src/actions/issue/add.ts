@@ -9,7 +9,11 @@ export const addIssue = (
 ): { issueId: string; createdIssue: Issue } => {
   const room = store[roomId];
   const issueId = getIssueId(room.issues);
-  const createdIssue = { ...issue, status: IssueStatus.pending };
+  const createdIssue = {
+    ...issue,
+    status: IssueStatus.pending,
+    date: new Date().getTime(),
+  };
   room.issues = { ...room.issues, [issueId]: createdIssue };
   return { issueId, createdIssue };
 };
