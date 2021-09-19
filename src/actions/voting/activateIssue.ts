@@ -1,11 +1,11 @@
-import { Issue, IssueStatus } from '../../types/issue';
+import { Issues, IssueStatus } from '../../types/issue';
 import { Store } from '../../types/room';
 
 export const setActiveIssue = (
   roomId: string,
   activeIssueId: string,
   store: Store
-): Issue => {
+): Issues => {
   const room = store[roomId];
   const activeIssue = {
     ...room.issues[activeIssueId],
