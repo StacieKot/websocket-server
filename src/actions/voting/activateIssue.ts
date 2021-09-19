@@ -1,7 +1,7 @@
 import { Issue, IssueStatus } from '../../types/issue';
 import { Store } from '../../types/room';
 
-export const activateIssue = (
+export const setActiveIssue = (
   roomId: string,
   activeIssueId: string,
   store: Store
@@ -13,5 +13,5 @@ export const activateIssue = (
     vote: [],
   };
   room.issues = { ...room.issues, [activeIssueId]: activeIssue };
-  return activeIssue;
+  return room.issues;
 };
