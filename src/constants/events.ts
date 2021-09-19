@@ -45,8 +45,6 @@ export enum GameEvents {
   gameTitleChanged = 'GAME_TITLE_CHANGED',
   startGame = 'START_GAME',
   gameIsStarted = 'GAME_IS_STARTED',
-  activateIssue = 'ACTIVATE_ISSUE',
-  issueIsActive = 'ISSUE_IS_ACTIVE',
   issueVote = 'ISSUE_VOTE',
   userHasVoted = 'USER_HAS_VOTED',
   issueVotingResult = 'ISSUE_VOTING_RESULT',
