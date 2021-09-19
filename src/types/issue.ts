@@ -16,7 +16,7 @@ export interface Issue {
   title: string;
   priority?: boolean;
   statistics?: IssueStatistics;
-  vote?: IssueVote[];
+  votes?: IssueVote[];
   status: keyof typeof IssueStatus;
   date?: number;
 }

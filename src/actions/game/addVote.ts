@@ -11,7 +11,7 @@ export const addVote = (
   const room = store[roomId];
   const issue = {
     ...room.issues[issueId],
-    vote: [...(room.issues[issueId].vote as IssueVote[]), { vote, userId }],
+    vote: [...(room.issues[issueId].votes as IssueVote[]), { vote, userId }],
   };
 
   room.issues = { ...room.issues, [issueId]: issue };
