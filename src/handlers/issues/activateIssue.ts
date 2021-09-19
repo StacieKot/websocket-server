@@ -13,7 +13,7 @@ export const activateIssueHandler =
       const issues = setActiveIssue(roomId, issueId, store);
       callback({
         status: 200,
-        data: { issues },
+        data: issues,
       });
       socket.to(roomId).emit(GameEvents.issueIsActive, issues);
     } catch {

@@ -1,6 +1,6 @@
 import { ErrorResponse } from './data';
 import { GameSettings, GameStatus } from './game';
-import { Issue } from './issue';
+import { Issue, Issues } from './issue';
 import { Message } from './message';
 import { Room, Round } from './room';
 import { User } from './user';
@@ -20,6 +20,7 @@ type DataType =
   | Message
   | GameSettings
   | Issue
+  | Issues
   | boolean
   | string;
 
