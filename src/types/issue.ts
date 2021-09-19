@@ -7,6 +7,7 @@ export enum IssueStatus {
 export interface IssueStatistics {
   [vote: string]: { votersAmount: number; percentage: number };
 }
+
 export interface IssueVote {
   vote: string;
   userId: string;
