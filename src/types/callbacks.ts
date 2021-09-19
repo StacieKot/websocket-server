@@ -17,6 +17,7 @@ type DataType =
       gameStatus?: keyof typeof GameStatus;
     }
   | { currentIssueId: string, issues: Issues, roundIsActive: boolean }
+  | { issueId: string, userId: string, vote: string }
   | Message
   | GameSettings
   | Issue

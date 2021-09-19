@@ -1,4 +1,4 @@
-import { Issue, IssueVote } from '../../types/issue';
+import { IssueVote } from '../../types/issue';
 import { Store } from '../../types/room';
 
 export const addVote = (
@@ -7,7 +7,7 @@ export const addVote = (
   issueId: string,
   vote: string,
   store: Store
-): Issue => {
+): void => {
   const room = store[roomId];
   const issue = {
     ...room.issues[issueId],
@@ -15,5 +15,4 @@ export const addVote = (
   };
 
   room.issues = { ...room.issues, [issueId]: issue };
-  return issue;
 };
