@@ -1,6 +1,3 @@
-import { Issue } from '../../types/issue';
-import { Store } from '../../types/room';
-import { getVotingStatistics } from './getStatistics';
 
 // export const stopRound = (
 //   roomId: string,
