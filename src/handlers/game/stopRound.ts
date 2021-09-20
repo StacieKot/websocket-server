@@ -16,7 +16,7 @@ export const stopRoundHandler =
       });
       socket
         .to(roomId)
-        .emit(GameEvents.roundIsStopped, { roundIsActive, issueId, issue });
+        .emit(GameEvents.roundIsFinished, { roundIsActive, issueId, issue });
     } catch {
       handleError(socket, callback);
     }

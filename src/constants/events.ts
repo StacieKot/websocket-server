@@ -53,7 +53,7 @@ export enum GameEvents {
   startRound = 'START_ROUND',
   roundIsStarted = 'ROUND_IS_STARTED',
   stopRound = 'STOP_ROUND',
-  roundIsStopped = 'ROUND_IS_STOPPED',
+  roundIsFinished = 'ROUND_IS_FINISHED',
   setFinalVote = 'SET_FINAL_VOTE',
   finalVote = 'FINAL_VOTE',
 }
