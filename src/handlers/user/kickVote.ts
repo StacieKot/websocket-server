@@ -46,8 +46,8 @@ export const kickUserVotingHandler =
       if (userWasKicked) {
         io.to(kickedUserId).disconnectSockets();
       }
-    } catch {
-      handleError(socket, callback);
+    } catch (error: unknown) {
+      handleError(error as Error, socket, callback);
       const response = {
         status: 500,
         message: 'Voting error, user is not deleted',
