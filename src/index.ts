@@ -8,7 +8,7 @@ import {
   IssueEvents,
   KickUserEvents,
   RoomEvents,
-  UserEvents,
+  UserEvents
 } from './constants/events';
 import { gameStatusHandler } from './handlers/game/gameStatus';
 import { gameTitleHandler } from './handlers/game/gameTitle';
@@ -35,7 +35,7 @@ import { userReconnectingHandler } from './handlers/user/reconnecting';
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-const allowedOrigins = ['http://localhost:8080', 'http://localhost:3000'];
+const allowedOrigins = ['http://localhost:8080', 'http://localhost:3000', 'https://em-sk-eb-planning-poker.netlify.app/'];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
