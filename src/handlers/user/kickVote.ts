@@ -44,7 +44,7 @@ export const kickUserVotingHandler =
       socket.to(kickedUserId).emit(kickedUserEvent, kickUserData);
 
       if (userWasKicked) {
-        io.to(kickedUserId).disconnectSockets();
+        io.in(kickedUserId).socketsLeave(roomId);
       }
     } catch (error: unknown) {
       handleError(error as Error, socket, callback);
