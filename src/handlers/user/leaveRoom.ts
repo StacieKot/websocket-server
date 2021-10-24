@@ -20,7 +20,7 @@ export const leaveRoomHandler =
       socket
         .to(roomId)
         .emit(UserEvents.userLeft, { userId: socket.id, user: updatedUser });
-      socket.disconnect();
+      // socket.disconnect();
     } catch (error: unknown) {
       handleError(error as Error, socket, callback);
     }
